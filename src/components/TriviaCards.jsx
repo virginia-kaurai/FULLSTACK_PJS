@@ -15,3 +15,4 @@ const TriviaCards = () => {
 }
 
 
+export default TriviaCards
