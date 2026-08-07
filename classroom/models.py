@@ -52,3 +52,58 @@ class ClassDetail(models.Model):
     name = models.ForeignKey(Class, on_delete=models.CASCADE)
     description = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
+
+
+class Teacher(models.Model):
+    name = models.CharField(max_length=100)
+    subject = models.CharField(max_length=100)
+    staff_number = models.CharField(max_length=20, primary_key=True)
+    Experience = models.IntegerField(help_text="Experience in years")
+    Qualification = models.CharField(max_length=100)
+    salary = models.DecimalField(max_digits=10, decimal_places=2)
+
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.name
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    Registration_number = models.CharField(max_length=20 , primary_key=True) 
+    class_name = models.ForeignKey(Class, on_delete=models.CASCADE)
+    Home_address = models.CharField(max_length=255)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.name
+
+class Attendance(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    date = models.DateField()
+    choices = (
+        ('present', 'Present'),
+        ('absent', 'Absent'),
+    )
+    status = models.CharField(max_length=10, choices=choices)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.student.name} - {self.date} - {self.status}"        
+class Results(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    subject = models.CharField(max_length=100)
+    marks = models.IntegerField()
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.student.name} - {self.subject} - {self.marks}"
+
+class Enrollment(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    class_name = models.ForeignKey(Class, on_delete=models.CASCADE)
+    enrollment_date = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.student.name} - {self.class_name.name} - {self.enrollment_date}"       
