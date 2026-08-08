@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'School.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'LMS',
+        'NAME': 'lms',
         'USER': 'adminuser',
-        'PASSWORD': 'new_password',
+        'PASSWORD': 'newpassword',
         'HOST': 'localhost',
         'PORT': '5432',
     }
