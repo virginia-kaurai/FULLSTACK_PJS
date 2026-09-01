@@ -42,3 +42,10 @@ class UserLoginSerializer(serializers.Serializer):
         if user and user.is_active:
             return user
         raise serializers.ValidationError("Invalid credentials or inactive user.")
+
+
+
+
+
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
